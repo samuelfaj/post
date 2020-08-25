@@ -1,0 +1,16 @@
+{
+    "name": "star/post",
+    "description": "post actions",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Raymond Herndon",
+            "email": "rherndon@starsacramento.org"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {"STAR\\post\\": "src/"}
+    },
+    "require": {}
+}
