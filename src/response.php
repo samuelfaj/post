@@ -3,7 +3,7 @@ namespace STAR\post;
 
 class response {
 	public String $message = 'Post Successful';
-	public Object $object;
+	public $object;
 	public Bool $error = false;
 	public String $errorMessage = '';
 
