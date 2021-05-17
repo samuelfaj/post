@@ -1,14 +1,30 @@
 <?php
 namespace STAR\post;
 
+use STAR\post\message;
+
 class response {
-	public String $message = 'Post Successful';
+	public string $message = 'Post Successful';
 	public $object;
-	public Bool $error = false;
-	public String $errorMessage = '';
+	public array $array;
+	public bool $error = false;
+	public string $errorMessage = '';
+	public array $messages = [];
 
 	public function __construct(Object $object = null){
         $this->object = is_null($object) ? new \stdClass() : $object;
+	}
+
+	public function addMessage(
+		$text = '',
+		$error = false,
+		$type = 'toast'
+	) : void {
+		$msg = new message();
+		$msg->text = $text;
+		$msg->error = $error;
+		$msg->type = $type;
+		$this->messages[] = $msg;
 	}
 	
 	public function return(String $message = '', String $error = '', int $httpResponseCode = null) {
