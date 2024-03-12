@@ -10,6 +10,7 @@ class response {
 	public bool $error = false;
 	public string $errorMessage = '';
 	public array $messages = [];
+	public ?int $time = null;
 
 	public function __construct(Object $object = null){
         $this->object = is_null($object) ? new \stdClass() : $object;
