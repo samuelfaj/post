@@ -2,6 +2,7 @@
     "name": "samuelfaj/post",
     "description": "post actions",
     "type": "library",
+    "version": "1.1",
     "authors": [
         {
             "name": "Raymond Herndon",
