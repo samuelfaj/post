@@ -3,7 +3,6 @@ namespace STAR\post;
 
 use STAR\post\message;
 
-
 function SamUtf8ize($data) {
 	if (is_array($data)) {
 		foreach ($data as $key => $value) {
