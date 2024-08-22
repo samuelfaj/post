@@ -6,11 +6,11 @@ use STAR\post\message;
 function SamUtf8ize($data) {
 	if (is_array($data)) {
 		foreach ($data as $key => $value) {
-			$data[$key] = utf8ize($value);
+			$data[$key] = SamUtf8ize($value);
 		}
 	} elseif (is_object($data)) {
 		foreach ($data as $key => $value) {
-			$data->$key = utf8ize($value);
+			$data->$key = SamUtf8ize($value);
 		}
 	} elseif (is_string($data)) {
 		return mb_convert_encoding($data, 'UTF-8', 'UTF-8');
