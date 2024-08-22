@@ -16,6 +16,21 @@ class response {
         $this->object = is_null($object) ? new \stdClass() : $object;
 	}
 
+    public function utf8ize($data) {
+        if (is_array($data)) {
+            foreach ($data as $key => $value) {
+                $data[$key] = utf8ize($value);
+            }
+        } elseif (is_object($data)) {
+            foreach ($data as $key => $value) {
+                $data->$key = utf8ize($value);
+            }
+        } elseif (is_string($data)) {
+            return mb_convert_encoding($data, 'UTF-8', 'UTF-8');
+        }
+        return $data;
+    }
+
 	public function addMessage(
 		$text = '',
 		$error = false,
@@ -34,7 +49,8 @@ class response {
 			$this->errorMessage = $error;
 		}
 		if(!empty($message))$this->message = $message;
-		echo(json_encode($this));
+
+		echo(json_encode($this->utf8ize($this)));
 		if(!is_null($httpResponseCode))http_response_code($httpResponseCode);
 		exit;
 	}
