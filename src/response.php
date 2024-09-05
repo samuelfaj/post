@@ -3,15 +3,14 @@ namespace STAR\post;
 
 use STAR\post\message;
 
-
 function SamUtf8ize($data) {
 	if (is_array($data)) {
 		foreach ($data as $key => $value) {
-			$data[$key] = utf8ize($value);
+			$data[$key] = SamUtf8ize($value);
 		}
 	} elseif (is_object($data)) {
 		foreach ($data as $key => $value) {
-			$data->$key = utf8ize($value);
+			$data->$key = SamUtf8ize($value);
 		}
 	} elseif (is_string($data)) {
 		return mb_convert_encoding($data, 'UTF-8', 'UTF-8');
@@ -45,14 +44,20 @@ class response {
 	}
 	
 	public function return(String $message = '', String $error = '', int $httpResponseCode = null) {
+		if(!is_null($httpResponseCode)){
+			http_response_code($httpResponseCode);
+		};
+
 		if(!empty($error)) {
 			$this->error = true;
 			$this->errorMessage = $error;
 		}
-		if(!empty($message))$this->message = $message;
+		
+		if(!empty($message)){
+			$this->message = $message;
+		}
 
 		echo(json_encode(SamUtf8ize($this)));
-		if(!is_null($httpResponseCode))http_response_code($httpResponseCode);
 		exit;
 	}
 }
