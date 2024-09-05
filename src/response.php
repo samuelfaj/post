@@ -44,14 +44,20 @@ class response {
 	}
 	
 	public function return(String $message = '', String $error = '', int $httpResponseCode = null) {
+		if(!is_null($httpResponseCode)){
+			http_response_code($httpResponseCode);
+		};
+
 		if(!empty($error)) {
 			$this->error = true;
 			$this->errorMessage = $error;
 		}
-		if(!empty($message))$this->message = $message;
+		
+		if(!empty($message)){
+			$this->message = $message;
+		}
 
 		echo(json_encode(SamUtf8ize($this)));
-		if(!is_null($httpResponseCode))http_response_code($httpResponseCode);
 		exit;
 	}
 }
